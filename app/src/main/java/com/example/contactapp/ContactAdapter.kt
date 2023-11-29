@@ -5,7 +5,9 @@ import android.graphics.Color
 import android.view.*
 import android.view.View.OnClickListener
 import android.view.View.OnCreateContextMenuListener
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import de.hdodenhof.circleimageview.CircleImageView
@@ -40,19 +42,22 @@ class ContactAdapter(private val contacts: List<ContactModel>) :
         }
 
         override fun onClick(p0: View?) {
+            val contactDetailFragment = ContactDetailFragment.newInstance(adapterPosition.toString())
+            (p0?.context as AppCompatActivity).supportFragmentManager.beginTransaction().addToBackStack(ContactDetailFragment.javaClass.simpleName).add(R.id.mainFragmentContainerView, contactDetailFragment).commit();
 
-            val intent = Intent(p0?.context, ContactDetailActivity::class.java)
+
+//            val intent = Intent(p0?.context, ContactDetailActivity::class.java)
 //            intent.putExtra("param1", edit1.text.toString())
 //            intent.putExtra("param2", edit2.text.toString())
             //startActivity(intent)
             //startActivityForResult(intent, 123)
-            try {
-
-                intent.putExtra("contactPosition", adapterPosition)
-                p0?.context?.startActivity(intent)
-            } catch (e: java.lang.Exception) {
-                print(e)
-            }
+//            try {
+//
+//                intent.putExtra("contactPosition", adapterPosition)
+//                p0?.context?.startActivity(intent)
+//            } catch (e: java.lang.Exception) {
+//                print(e)
+//            }
         }
 
 
